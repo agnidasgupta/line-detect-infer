@@ -1,3 +1,29 @@
+# Dataset Summary
+The dataset contains 139 pole-to-pole spans with 17,541 total BMP frames — tiny 31x57 grayscale cross-section images, like MRI slices through the corridor between two poles. Each frame has white (air), black (solids: vegetation/structures), and gray (labeled lines encoded with type + ID). Lines are extremely sparse (0.1–0.9% of pixels) and thin (1–3px wide). Across a span, all lines exhibit a smooth catenary sag pattern — their y-position dips in the middle frames and rises at both ends, all moving in unison.
+
+## Two ML Goals
+Goal A (Primary): Binary classification — does this span have power lines? Used to filter false-positive poles (e.g., tree trunks).
+Goal B (Secondary): Instance segmentation — segment individual lines with consistent IDs across all frames and classify type (comm/primary/neutral/secondary/transmission).
+Five SOTA Approaches Evaluated
+
+## Approach	Best For	Key Advantage	Key Risk
+3D UNet (nnU-Net style)	Goal B	Natural fit — MRI-like data, captures temporal tubes	
+Instance separation needs post-processing
+2D UNet + Temporal RNN/Transformer	Goal B	Flexible sequence length, separates spatial/temporal	Needs careful temporal attention design
+Graph Neural Network	Goal B	Sparse-efficient, natural instance handling	Requires good candidate extraction first
+RANSAC + Catenary Fitting	Baseline	Physics-informed, no training, interpretable	Breaks near poles or with heavy vegetation
+3D CNN Classifier	Goal A	Simple, captures temporal fingerprint	Needs synthetic negatives (no real negatives in data)
+
+## Recommended Strategy: Three Phases
+Phase 1 (1–2 weeks): Build a catenary-fitting baseline using RANSAC on the (frame, y) projection of black pixels. This is a non-ML approach that exploits the physics of power line sag and establishes a performance floor. Also build a visualization toolkit.
+
+Phase 2 (2–4 weeks): Train a custom 3D UNet with instance embedding heads and a semantic classification head. The 3D approach is ideal because the volumes are small (~350K voxels per span) and lines form continuous "tubes" — exactly what 3D medical segmentation excels at. Uses asymmetric kernels (larger along temporal axis) and discriminative loss for instance separation.
+
+Phase 3 (1–2 weeks): Add temporal refinement (BiLSTM/Transformer at bottleneck), train the Goal A binary classifier using synthetic negatives, and ensemble with catenary confidence.
+
+## Critical Risks
+The biggest risks are dataset size (only 139 spans — heavy augmentation and cross-validation are essential), no negative examples for Goal A (synthetic negatives must be crafted), and incomplete labels (some lower lines are unlabeled by design). 
+
 # Catenary / Parabola RANSAC Baseline + Visualization
 
 This folder adds a **non-ML baseline** that fits smooth sag curves to **(frame index, row y)** samples extracted from span BMP sequences. It establishes a performance floor and produces plots for inspection.
