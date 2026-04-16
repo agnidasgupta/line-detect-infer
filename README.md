@@ -1,3 +1,10 @@
+# Dataset Summary
+The dataset contains 139 pole-to-pole spans with 17,541 total BMP frames — tiny 31x57 grayscale cross-section images, like MRI slices through the corridor between two poles. Each frame has white (air), black (solids: vegetation/structures), and gray (labeled lines encoded with type + ID). Lines are extremely sparse (0.1–0.9% of pixels) and thin (1–3px wide). Across a span, all lines exhibit a smooth catenary sag pattern — their y-position dips in the middle frames and rises at both ends, all moving in unison.
+
+Two ML Goals
+Goal A (Primary): Binary classification — does this span have power lines? Used to filter false-positive poles (e.g., tree trunks).
+Goal B (Secondary): Instance segmentation — segment individual lines with consistent IDs across all frames and classify type (comm/primary/neutral/secondary/transmission).
+
 # Catenary / Parabola RANSAC Baseline + Visualization
 
 This folder adds a **non-ML baseline** that fits smooth sag curves to **(frame index, row y)** samples extracted from span BMP sequences. It establishes a performance floor and produces plots for inspection.
