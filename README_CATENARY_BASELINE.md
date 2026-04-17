@@ -6,14 +6,6 @@ Goal A (Primary): Binary classification — does this span have power lines? Use
 Goal B (Secondary): Instance segmentation — segment individual lines with consistent IDs across all frames and classify type (comm/primary/neutral/secondary/transmission).
 Five SOTA Approaches Evaluated
 
-## Approach	Best For	Key Advantage	Key Risk
-3D UNet (nnU-Net style)	Goal B	Natural fit — MRI-like data, captures temporal tubes	
-Instance separation needs post-processing
-2D UNet + Temporal RNN/Transformer	Goal B	Flexible sequence length, separates spatial/temporal	Needs careful temporal attention design
-Graph Neural Network	Goal B	Sparse-efficient, natural instance handling	Requires good candidate extraction first
-RANSAC + Catenary Fitting	Baseline	Physics-informed, no training, interpretable	Breaks near poles or with heavy vegetation
-3D CNN Classifier	Goal A	Simple, captures temporal fingerprint	Needs synthetic negatives (no real negatives in data)
-
 ## Recommended Strategy: Three Phases
 Phase 1 (1–2 weeks): Build a catenary-fitting baseline using RANSAC on the (frame, y) projection of black pixels. This is a non-ML approach that exploits the physics of power line sag and establishes a performance floor. Also build a visualization toolkit.
 
