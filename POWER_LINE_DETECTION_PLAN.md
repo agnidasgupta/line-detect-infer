@@ -59,7 +59,6 @@ power lines from sequential LiDAR cross-section frame images.
 
 ## 2. Problem Decomposition
 
-Per `Lines_Detect_Goals.txt`, there are two ML goals:
 
 ### Goal A (Primary): Span-Level Binary Classification
 > Does this span contain power lines between its poles?
