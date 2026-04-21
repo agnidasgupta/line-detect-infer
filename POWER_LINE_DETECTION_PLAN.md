@@ -7,7 +7,7 @@ power lines from sequential LiDAR cross-section frame images.
 
 ## 1. Dataset Characterization
 
-**Note on scale:** Row counts such as “139 spans” and “17,541 frames” came from a **sample** of the tree used while drafting this plan. Your full `DUKE_FLORIDA_150` directory may contain **more** spans and frames. **Python code does not hardcode these numbers** — it discovers every immediate subfolder that contains `frame_*.bmp`.
+**Note on scale:** Row counts such as “139 spans” and “17,541 frames” came from a **sample** of the tree used while drafting this plan. The full `DUKE_FLORIDA_150` directory may contain **more** spans and frames. **Python code does not hardcode these numbers** — it discovers every immediate subfolder that contains `frame_*.bmp`.
 
 ### 1.1 Structure
 
@@ -102,9 +102,9 @@ White (empty) dominates at 86–100%. This means:
 
 ### 3.3 Temporal Dependency is Critical
 
-The goals document explicitly states: *"There is no sufficient way to determine
-[lines] solely from each image, but a human eye can pick them out reliably from a
-flip-book."* This is the central challenge. Any viable approach **must** model the
+Since the goal states: *"There is no sufficient way to determine
+lines solely from each image, but a human eye can pick them out reliably from a
+flip-book."* - this is the central challenge. Any viable approach **must** model the
 relationship between frames. A per-frame segmentation model will fail.
 
 ### 3.4 Variable Sequence Length
