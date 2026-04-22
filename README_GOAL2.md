@@ -1,6 +1,6 @@
 # Goal 2 — Semantic segmentation of span volumes (line types)
 
-**Goal 2** (from `Lines_Detect_Goals.txt`): given span frame BMPs, predict **which voxels are conductors** and their **line type** (comm / primary / neutral / secondary / transmission), with temporal consistency handled by a 3D model over the whole span.
+**Goal 2** : given span frame BMPs, predict **which voxels are conductors** and their **line type** (comm / primary / neutral / secondary / transmission), with temporal consistency handled by a 3D model over the whole span.
 
 This folder implements a **first training stack**:
 
@@ -120,7 +120,7 @@ python3 -m line_seg.infer_goal2 \
 
 ## Design notes
 
-- **Variable T**: each span has a different number of frames; the dataloader uses **`batch_size=1`**. To batch multiple spans, add padding/collate (not implemented here). The UNet uses **GroupNorm** (not BatchNorm) so single-volume batches do not destabilize statistics.
+- **Variable T**: each span has a different number of frames; the dataloader uses **`batch_size=1`**. To batch multiple spans, add padding/collate (not implemented here). The UNet uses **GroupNorm** (not BatchNorm) so single-volume batches do not destabilize statistics. Batch size 1 is used because, in 3D segmentation, the scarce resource is usually memory and context rather than batch averaging. For our rare one-voxel tubular class, preserving a large H×W×T crop was more valuable than fitting multiple smaller samples per step. GroupNorm made that feasible because it stays stable even when the batch size is 1. It maximizes 3D context for a rare, thin, temporally coherent target, and GroupNorm removes the usual normalization penalty of training with such a tiny batch.
 - **Instance identity** (same conductor across frames with a stable id) is **not** modeled; this head is **semantic only**. Add an instance embedding head + discriminative loss later (see `POWER_LINE_DETECTION_PLAN.md` Phase 2).
 - **Inference without gray labels**: train a second model on **synthetic B&W** (e.g. map lines → black) when that pipeline is ready.
 
