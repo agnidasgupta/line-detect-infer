@@ -1,12 +1,12 @@
 # Paperspace: What to Upload, How to Run, What Each Output Does
 
-This guide assumes a **Paperspace Gradient notebook** or **Linux machine** with GPU, and that your project root on the remote will be something like `/notebooks/duke_florida` or `/notebooks/DUKE_FLORIDA_150`. Adjust paths to match where you unpack the data.
+This guide assumes a **Paperspace Gradient notebook** or **Linux machine** with GPU, and that the project root on the remote will be something like `/notebooks/DUKE_FLORIDA_150`. Adjust paths to match where to unpack the data.
 
-**Dataset size:** The planning docs used a **sample** subset (e.g. ~139 spans) to size the problem. Your full `DUKE_FLORIDA_150` upload may include **more** span folders. **No code changes are required** — `line_seg/volume.py:list_span_dirs()` and training **enumerate every** immediate subfolder under `--data_root` that contains `frame_*.bmp`. More spans generally **help** training (same label format).
+**Dataset size:** The planning docs used a **sample** subset (e.g. ~139 spans) to size the problem. The full `DUKE_FLORIDA_150` upload may include **more** span folders. **No code changes are required** — `line_seg/volume.py:list_span_dirs()` and training **enumerate every** immediate subfolder under `--data_root` that contains `frame_*.bmp`. More spans generally **help** training (same label format).
 
 ---
 
-## 1. Directory you must upload (dataset + code)
+## 1. Directory to be uploaded (dataset + code)
 
 Upload **one folder** that contains **both** the span image data **and** the Python package layout below. The training script expects `--data_root` to point at the **parent** of all span subfolders.
 
@@ -50,7 +50,7 @@ DUKE_FLORIDA_150/                    ← upload this entire directory (name can 
 
 **Critical rule:** `line_seg/train_goal2.py` uses `--data_root .` meaning “the directory that **directly contains** the span folders” (e.g. `206_213`, `2884_2888`). That directory must also contain `line_seg/` and `tools/` so imports work when you `cd` there.
 
-**What you are uploading in practice**
+**What to upload in practice**
 
 | Path | Role |
 |------|------|
@@ -61,7 +61,7 @@ DUKE_FLORIDA_150/                    ← upload this entire directory (name can 
 | **`requirements_baseline.txt`** | `numpy`, `matplotlib`, `scipy`, `pillow` — used for baseline + shared deps. |
 | **`requirements_goal2.txt`** | `torch`, `scikit-learn`, `matplotlib`, `scipy` — add on top for training and evaluation plots. |
 
-You do **not** need to upload `goal2_runs/` or `baseline_runs/` before training; those are **created** when you run the scripts.
+Do **not** upload `goal2_runs/` or `baseline_runs/` before training; those are **created** when running the scripts.
 
 ### 1.2 Upload checklist — **Goal 2 training** (strict minimum)
 
@@ -81,7 +81,7 @@ Upload **one** tree whose root you will `cd` into and pass as `--data_root .`. T
 
 If anything in the **Yes** rows is missing, training will fail (`ModuleNotFoundError`, empty dataset, or missing BMPs).
 
-### 1.3 What you need on Paperspace for **evaluation only** (`export_goal2_metrics`)
+### 1.3 What is needed on Paperspace for **evaluation only** (`export_goal2_metrics`)
 
 Evaluation **reloads validation spans from disk** using `run_meta.json`, so the machine must still have:
 
