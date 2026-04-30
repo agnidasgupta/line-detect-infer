@@ -35,7 +35,7 @@ class ConvBlock3D(nn.Module):
 
 Design choices:
 
-- **`3×3×3` convolutions on all three axes `(T, H, W)`** so the receptive field covers adjacent **frames** as well as spatial neighbors. This turns a pixel on a thin conductor into a continuous 3D tube in the model's view.
+- **`3×3×3` convolutions on all three axes `(T, H, W)`** so the receptive field covers adjacent **frames** as well as spatial neighbors. This turns a pixel on a thin conductor into a continuous 3D tube in the model's view. The model sees a local neighborhood across adjacent frames as well as spatial pixels. This is what lets it turn a single pixel on a thin conductor into a continuous 3D tube in its receptive field, aggregating evidence across frames that a pixel row belongs to a conductor even when it is partially occluded in one frame.
 - **Two convs per block** grow the receptive field before each down/up-sample.
 - **`bias=False`** because the affine parameters live in `GroupNorm`.
 - **`GroupNorm`** with groups picked by `_group_norm_groups` (prefer 8, fall back to 4/2/1 to ensure `num_channels % g == 0`). Required because training uses **`batch_size=1`** — `BatchNorm` would collapse on a single-volume batch, and span `T` varies.
