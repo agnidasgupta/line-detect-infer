@@ -43,7 +43,7 @@ python3 -m pip install -r requirements_baseline.txt
 python3 -m pip install -r requirements_goal2.txt
 ```
 
-Use a CUDA machine for reasonable speed.
+CUDA compatible machine needed for reasonable speed.
 
 ---
 
