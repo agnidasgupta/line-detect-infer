@@ -48,7 +48,7 @@ DUKE_FLORIDA_150/                    ← upload this entire directory (name can 
 └── (no need to upload empty folders)
 ```
 
-**Critical rule:** `line_seg/train_goal2.py` uses `--data_root .` meaning “the directory that **directly contains** the span folders” (e.g. `206_213`, `2884_2888`). That directory must also contain `line_seg/` and `tools/` so imports work when you `cd` there.
+**Critical rule:** `line_seg/train_goal2.py` uses `--data_root .` meaning “the directory that **directly contains** the span folders” (e.g. `206_213`, `2884_2888`). That directory must also contain `line_seg/` and `tools/` so imports work when `cd` there.
 
 **What to upload in practice**
 
