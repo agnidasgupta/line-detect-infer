@@ -71,7 +71,7 @@ With the training default `base=24`, the channel widths are:
 Two architectural points worth flagging:
 
 - **Spatial-only pooling (`MaxPool3d((1, 2, 2))`)** — the `T` axis is **never down-sampled**. This keeps per-frame resolution even on short spans (e.g. `T=9`) and lets the network emit one class map per original frame without temporal resampling.
-- **Decoder upsamples with `F.interpolate(..., mode="trilinear")`** then applies a `ConvBlock3D` (no `ConvTranspose3d`). As the module docstring notes:
+- **Decoder upsamples with `F.interpolate(..., mode="trilinear")`** then applies a `ConvBlock3D` (no `ConvTranspose3d`). As the module notes:
 
 ```1:5:DUKE_FLORIDA_150/line_seg/model.py
 """
