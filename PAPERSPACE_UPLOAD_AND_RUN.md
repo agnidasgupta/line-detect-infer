@@ -63,7 +63,7 @@ DUKE_FLORIDA_150/                    ← upload this entire directory (name can 
 
 Do **not** upload `goal2_runs/` or `baseline_runs/` before training; those are **created** when running the scripts.
 
-### 1.2 Upload checklist — **Goal 2 training** (strict minimum)
+### 1.2 Upload checklist — **Goal 2 training** (strict minimum) 
 
 Upload **one** tree whose root you will `cd` into and pass as `--data_root .`. That root **must** contain all of the following:
 
@@ -83,7 +83,7 @@ If anything in the **Yes** rows is missing, training will fail (`ModuleNotFoundE
 
 ### 1.3 What is needed on Paperspace for **evaluation only** (`export_goal2_metrics`)
 
-Evaluation **reloads validation spans from disk** using `run_meta.json`, so the machine must still have:
+Evaluation **reloads validation spans from disk** using `run_meta.json`, so the machine must still have: 
 
 | Item | Required? |
 |------|-----------|
@@ -111,7 +111,7 @@ Choose one:
    - Example:  
      `rsync -avz --progress /local/DUKE_FLORIDA_150/ user@host:/notebooks/DUKE_FLORIDA_150/`
 
-After upload, verify:
+After upload, verify: 
 
 ```bash
 cd /notebooks/DUKE_FLORIDA_150   # use your actual path
