@@ -1,4 +1,4 @@
-# Line Segmentation (Goal 2) — Unity Sentis Integration Guide
+# Line Segmentation (Goal 2) — Unity Sentis Integration Guide:
 
 End-to-end guide for exporting the Goal 2 `SpanUNet3D` line-segmentation model from PyTorch (Paperspace) and running it inside Unity via Unity Sentis. Mirrors the pole detector sidecar style (`PS_Unity_sidecar/`) but is a **single-stage** model: one ONNX + one sidecar JSON, no compute shader required.
 
@@ -6,7 +6,7 @@ Companion docs: [`README_Sparse3DUnet_semantic.md`](../README_Sparse3DUnet_seman
 
 ---
 
-## 1. Files in this folder
+## 1. Files in this folder 
 
 | File | Role |
 |------|------|
@@ -28,7 +28,7 @@ It produces, into your chosen output directory:
 
 ## 2. Prerequisites
 
-### Paperspace (export)
+### Paperspace (export) 
 
 ```bash
 pip install onnx onnxruntime onnxconverter-common
