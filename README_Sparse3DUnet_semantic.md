@@ -57,7 +57,7 @@ class SpanUNet3D(nn.Module):
         self.out_conv = nn.Conv3d(b, num_classes, kernel_size=1)
 ```
 
-With the training default `base=24`, the channel widths are:
+With the training default `base=24`, the channel widths are: 
 
 | Stage | Channels |
 |-------|----------|
@@ -73,7 +73,7 @@ Two architectural points worth flagging:
 - **Spatial-only pooling (`MaxPool3d((1, 2, 2))`)** — the `T` axis is **never down-sampled**. This keeps per-frame resolution even on short spans (e.g. `T=9`) and lets the network emit one class map per original frame without temporal resampling.
 - **Decoder upsamples with `F.interpolate(..., mode="trilinear")`** then applies a `ConvBlock3D` (no `ConvTranspose3d`). As the module notes:
 
-```1:5:DUKE_FLORIDA_150/line_seg/model.py
+```1:5:DUKE_FLORIDA_150/line_seg/model.py 
 """
 Lightweight 3D UNet for T×H×W span volumes.
 
