@@ -1,7 +1,7 @@
 # Power Line Detection Plan — DUKE_FLORIDA_150
 
 Critical analysis and SOTA algorithm recommendations for detecting and classifying
-power lines from sequential LiDAR cross-section frame images.
+power lines from sequential LiDAR cross-section frame images. 
 
 ---
 
@@ -72,7 +72,7 @@ The input is an entire sequence of B&W frames; the output is a binary yes/no.
 > (comm/primary/neutral/secondary/transmission).
 
 This is a **video instance segmentation** problem on sequential 2D cross-sections,
-where:
+where: 
 - Objects (lines) are thin, persistent, and move coherently across frames.
 - The number of objects is unknown and varies per span.
 - Each object has both an **instance identity** (consistent ID) and a **semantic
@@ -92,7 +92,7 @@ demands:
 - Careful attention to the **sequence dimension** (100–300 frames) as the primary
   information axis, not the spatial dimensions.
 
-### 3.2 Extreme Class Imbalance
+### 3.2 Extreme Class Imbalance 
 
 Line pixels are 0.1–0.9% of each frame. Black (solid) pixels are 0–14%.
 White (empty) dominates at 86–100%. This means:
@@ -131,7 +131,7 @@ present. The model should be robust to:
 
 ---
 
-## 4. SOTA Algorithm Analysis
+## 4. SOTA Algorithm Analysis 
 
 ### 4.1 Approach 1: 3D UNet on Voxel Volumes (Recommended for Goal B)
 
@@ -171,7 +171,7 @@ with:
 - **UNETR / Swin-UNETR**: Transformer-based 3D segmentation — likely overkill
   for this data size but provides strong temporal attention.
 - **VoxelMorph-style**: If we frame line tracking as deformable registration
-  across frames.
+  across frames. 
 
 **Strengths**: Naturally captures temporal coherence. Well-studied for thin
 structure segmentation (vessels, airways). Can handle variable sequence lengths
