@@ -1,4 +1,4 @@
-# `LineSegSentisInferenceManager.cs` — step-by-step working
+# `LineSegSentisInferenceManager.cs` — step-by-step working:
 
 Companion document to [`unity_export/LineSegSentisInferenceManager.cs`](unity_export/LineSegSentisInferenceManager.cs). This file walks through the manager's runtime behavior, the input it expects, how the output is produced on the GPU, and how each voxel is labelled. The manager targets **Unity Sentis 2.6.1** and consumes the ONNX produced by [`line_seg/export_goal2_onnx.py`](line_seg/export_goal2_onnx.py).
 
